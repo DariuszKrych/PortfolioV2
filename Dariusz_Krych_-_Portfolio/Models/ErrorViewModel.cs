@@ -1,0 +1,8 @@
+namespace Dariusz_Krych___Portfolio.Models;
+
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+}

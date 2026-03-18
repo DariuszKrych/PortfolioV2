@@ -1,0 +1,21 @@
+@model IEnumerable<Dariusz_Krych___Portfolio.Models.Github_Project>
+
+@{
+    ViewData["Title"] = "Python Projects";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4">My Python Projects</h1>
+    <p>Here are some of the cool things I've built using Python.</p>
+</div>
+
+<div class="project-list">
+    @foreach (var project in Model)
+    {
+        <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+            <h2>@project.Title</h2>
+            <p>@project.Description</p>
+            <a href="@project.GitHubLink" target="_blank">View Code on GitHub</a>
+        </div>
+    }
+</div>
