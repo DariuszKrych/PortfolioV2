@@ -1,10 +1,10 @@
 @{
-    ViewData["Title"] = "C# Projects";
+    ViewData["Title"] = "Python Projects";
 }
 
 <div class="text-center mb-5">
-    <h1 class="display-4">My C# Projects</h1>
-    <p>Here are some of the projects I've built using C# and Unity.</p>
+    <h1 class="display-4">My Web Dev Projects</h1>
+    <p>Here are the websites which I have developed.</p>
 </div>
 
 <div id="loading-spinner" class="text-center my-5">
@@ -24,7 +24,7 @@
             const container = document.getElementById("projects-container");
             const spinner = document.getElementById("loading-spinner");
 
-            fetch('/Home/GetCSharpProjectsData')
+            fetch('/Home/GetWebDevProjectsData')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

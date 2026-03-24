@@ -1,7 +1,10 @@
+using Dariusz_Krych___Portfolio.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<IGithubService, GithubService>();
 
 var app = builder.Build();
 

@@ -1,11 +1,19 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Dariusz_Krych___Portfolio.Models;
+using Dariusz_Krych___Portfolio.Services;
 
 namespace Dariusz_Krych___Portfolio.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IGithubService _githubService;
+
+    public HomeController(IGithubService githubService)
+    {
+        _githubService = githubService;
+    }
+
     public IActionResult Index()
     {
         return View();
@@ -15,43 +23,65 @@ public class HomeController : Controller
     {
         return View();
     }
-
-public IActionResult PythonProjects()
+    
+    public IActionResult Education()
     {
-        // 1. Create a list of dummy data (Later, this could come from a database!)
-        var myPythonProjects = new List<Github_Project>
+        return View();
+    }
+
+    public IActionResult WebDevProjects()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetWebDevProjectsData()
+    {
+        var repoUrls = new List<string>
         {
-            new Github_Project { 
-                Id = 1, 
-                Title = "Bookbinding Signature Creator", 
-                Description = "Takes an input of a 2 column pdf book file. Can add numbering to the pages. Cuts the pages in hald and shuffles them and divided them into seperate signatures so that when they are printed they can be directly bound into a book.", 
-                GitHubLink = "https://github.com/DariuszKrych/Bookbinding_Signature_Creator" 
-            },
-            new Github_Project { 
-                Id = 2, 
-                Title = "Real Time Traffic Light Simulation System", 
-                Description = "Realtime simulation of traffic lights with the SDL3 library using the PySDL3 wrapper. Written in Python.", 
-                GitHubLink = "https://github.com/DariuszKrych/Real-Time-Traffic-Light-Simulation-System" 
-            },
-            new Github_Project { 
-                Id = 3, 
-                Title = "Py-Jv String Matching", 
-                Description = "Implements various string matching algorithms and applies them onto data extracted from a steam reviews database.", 
-                GitHubLink = "https://github.com/DariuszKrych/Py-Jv_StringMatching" 
-            }
+            "https://github.com/DariuszKrych/Project_Kaida",
+            "https://github.com/DariuszKrych/Portfolio",
+            "https://github.com/DariuszKrych/PortfolioV2"
         };
 
-        // 2. Pass the data into the View
-        return View(myPythonProjects); 
+        var projects = await _githubService.GetProjectsAsync(repoUrls);
+        return Json(projects);
     }
 
-        public IActionResult CSharpProjects()
+    public IActionResult PythonProjects()
     {
         return View();
     }
-        public IActionResult Education()
+
+    [HttpGet]
+    public async Task<IActionResult> GetPythonProjectsData()
+    {
+        var repoUrls = new List<string>
+        {
+            "https://github.com/DariuszKrych/Bookbinding_Signature_Creator",
+            "https://github.com/DariuszKrych/Real-Time-Traffic-Light-Simulation-System",
+            "https://github.com/DariuszKrych/Py-Jv_StringMatching"
+        };
+
+        var projects = await _githubService.GetProjectsAsync(repoUrls);
+        return Json(projects);
+    }
+
+    public IActionResult CSharpProjects()
     {
         return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetCSharpProjectsData()
+    {
+        var repoUrls = new List<string>
+        {
+            "https://github.com/Sl11ck/Parking_Panic"
+        };
+
+        var projects = await _githubService.GetProjectsAsync(repoUrls);
+        return Json(projects);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
