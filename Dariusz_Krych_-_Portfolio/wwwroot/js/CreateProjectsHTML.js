@@ -24,29 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (project.videoUrl) {
                     videoHtml = '<div class="mt-3 mb-3">';
                     
-                    // Check for YouTube
-                    if (project.videoUrl.includes("youtube.com") || project.videoUrl.includes("youtu.be")) {
-                        let videoId = "";
-                        if (project.videoUrl.includes("v=")) {
-                            videoId = project.videoUrl.split("v=")[1].split("&")[0];
-                        } else if (project.videoUrl.includes("youtu.be/")) {
-                            videoId = project.videoUrl.split("youtu.be/")[1].split("?")[0];
-                        }
-
-                        if (videoId) {
-                            videoHtml += `
-                                <div class="ratio ratio-16x9" style="max-width: 600px;">
-                                    <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video" allowfullscreen></iframe>
-                                </div>`;
-                        }
-                    } else {
-                        // Standard video tag (works for resolved GitHub assets too)
-                        videoHtml += `
-                            <video controls style="max-width: 100%; max-height: 400px;">
-                                <source src="${project.videoUrl}">
-                                Your browser does not support the video tag.
-                            </video>`;
-                    }
+                    // Standard video tag (works for resolved GitHub assets too)
+                    videoHtml += `
+                        <video controls style="display: block; margin: 0 auto; max-width: 100%; max-height: 500px;">
+                            <source src="${project.videoUrl}">
+                            Your browser does not support the video tag.
+                        </video>`;
                     videoHtml += '</div>';
                 }
 
